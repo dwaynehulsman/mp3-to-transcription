@@ -36,6 +36,7 @@ async function transcribe(file) {
     {
     file,
     model: 'whisper-1',
+    language: process.env.SPOKEN_LANGUAGE ?? 'en',
     },
     {
       headers: {
