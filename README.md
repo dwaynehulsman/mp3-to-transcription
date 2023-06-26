@@ -1,26 +1,28 @@
-<h4 align="center">Transcribe Audio to Text with node.js using the Whisper model from <a href="https://openai.com/" target="_blank">OpenAI</a>.</h4>
+#OpenAI Transcription Service
+A simple node.js application that transcribes audio files using OpenAI's transcription service.
 
-## How To Use
+Prerequisites
+- Node.js installed on your machine
+- An OpenAI account with an API key
 
-To clone and run this application, you'll need [Git](https://git-scm.com) and [Node.js](https://nodejs.org/en/download/) (which comes with [npm](http://npmjs.com)) installed on your computer. From your command line:
+##Installation
+1. Clone this repository: git clone <repository-url>.
+2. Install necessary dependencies: `yarn install`.
+3. Create a `.env` file at the root directory and add your OpenAI API key:
 
-Clone this repository:
-
-```bash
-git clone https://github.com/robinvriens/openai-whisper.git
-# or
-git clone git@github.com:robinvriens/openai-whisper.git
+```makefile
+OPENAI_API_KEY=<your_openai_api_key>
 ```
 
-Make sure you add your API key in the .env file and have a audio file ready to be transcribed, you can start the app by running:
+## Usage
+This script transcribes an audio file into text.
+
+To use, simply run the script with the file path to the audio file as the first argument:
 
 ```bash
-node index.js
+
+node index.js /path/to/your/audio/file.mp3
 ```
+Here, `index.js` is the name of your Node.js script and `/path/to/your/audio/file.mp3` is the path to the audio file you want to transcribe. You'll need to replace these with the actual names and paths of your script and audio file.
 
-## My links
-
-> [robinvriens.com](https://www.robinvriens.com) &nbsp;&middot;&nbsp;
-> YouTube [Robin Vriens](https://www.youtube.com/channel/UCKGvKmXpUJOOaEpfhWgjELg) &nbsp;&middot;&nbsp;
-> GitHub [@robinvriens](https://github.com/robinvriens) &nbsp;&middot;&nbsp;
-> Instagram [@robinvriens](https://instagram.com/robinvriens)
+The script will output the transcription to the console.

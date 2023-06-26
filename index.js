@@ -7,8 +7,8 @@ async function transcribe(file) {
   const response = await axios.post(
     'https://api.openai.com/v1/audio/transcriptions',
     {
-      file,
-      model: 'whisper-1'
+    file,
+    model: 'whisper-1',
     },
     {
       headers: {
@@ -22,10 +22,24 @@ async function transcribe(file) {
 }
 
 async function main() {
-  const file = fs.createReadStream('audio.mp3');
+  // Process the command line arguments
+  const args = process.argv.slice(2);
+  if (args.length === 0) {
+    throw new Error('You must provide a file path as the first argument.');
+  }
+
+  const filePath = args[0];
+
+  if (!fs.existsSync(filePath)) {
+    throw new Error(`File does not exist at path: ${filePath}`);
+  }
+
+  const file = fs.createReadStream(filePath);
   const transcript = await transcribe(file);
 
   console.log(transcript);
 }
 
-main();
+main().catch(error => {
+  console.error(error);
+});
