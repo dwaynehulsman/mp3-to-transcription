@@ -1,11 +1,11 @@
-#OpenAI Transcription Service
+# OpenAI Transcription Service
 A simple node.js application that transcribes audio files using OpenAI's transcription service.
 
 Prerequisites
 - Node.js installed on your machine
 - An OpenAI account with an API key
 
-##Installation
+## Installation
 1. Clone this repository: git clone <repository-url>.
 2. Install necessary dependencies: `yarn install`.
 3. Create a `.env` file at the root directory and add your OpenAI API key:
