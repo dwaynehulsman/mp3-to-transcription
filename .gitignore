@@ -1,5 +1,7 @@
 transcriptions/
-
+mp3-parts/
+*.mp3
+*.wav
 # Logs
 logs
 *.log

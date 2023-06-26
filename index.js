@@ -6,6 +6,7 @@ const path = require('path');
 const MediaSplit = require('media-split');
 const { spawn } = require('child_process');
 const ffprobePath = require('ffprobe-static').path;
+const mp3PartsDir = path.join(__dirname, 'mp3-parts');
 
 
 async function getAudioDurationInSeconds(filePath) {
@@ -62,6 +63,11 @@ async function main() {
     throw new Error(`File does not exist at path: ${filePath}`);
   }
 
+  // Create the directory if it doesn't exist
+  if (!fs.existsSync(mp3PartsDir)) {
+    fs.mkdirSync(mp3PartsDir);
+  }
+
   let duration = await getAudioDurationInSeconds(filePath);
   let sections = [];
   for (let i = 0; i < duration; i += 300) { // 300 seconds is 5 minutes
@@ -70,7 +76,7 @@ async function main() {
     sections.push(`[${formatTime(start)} - ${formatTime(end)}] Part${i / 300 + 1}`);
   }
 
-  let split = new MediaSplit({ input: filePath, sections });
+  let split = new MediaSplit({ input: filePath, sections, output: mp3PartsDir });
   let sectionsData = await split.parse();
   
   console.log(`Split MP3 into ${sectionsData.length} sections.`)
@@ -79,7 +85,7 @@ async function main() {
   for (let i = 0; i < sectionsData.length; i++) {
     let section = sectionsData[i];
     console.log(`Transcribing ${section.name} (${i+1}/${sectionsData.length})`);
-    let file = fs.createReadStream(`./${section.name}`);
+    let file = fs.createReadStream(path.join(mp3PartsDir, `${section.name}`));
     let transcript = await transcribe(file);
     allTranscriptions += transcript + "\n";
   }
