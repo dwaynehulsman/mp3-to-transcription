@@ -2,6 +2,7 @@ require('dotenv').config();
 
 const fs = require('fs');
 const axios = require('axios');
+const path = require('path');
 
 async function transcribe(file) {
   const response = await axios.post(
@@ -38,7 +39,23 @@ async function main() {
   const transcript = await transcribe(file);
 
   console.log(transcript);
+
+  // Write to a file
+  const date = new Date();
+  const outputFileName = `transcription_${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}.txt`;
+  const outputDir = path.join(__dirname, 'transcriptions');
+
+  // Create directory if it does not exist
+  if (!fs.existsSync(outputDir)){
+    fs.mkdirSync(outputDir);
+  }
+
+  fs.writeFile(path.join(outputDir, outputFileName), transcript, (err) => {
+    if (err) throw err;
+    console.log(`The transcription was saved to ${outputFileName}`);
+  });
 }
+
 
 main().catch(error => {
   console.error(error);
