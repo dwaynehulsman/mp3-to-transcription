@@ -1,6 +1,10 @@
 {
   "dependencies": {
     "axios": "^1.4.0",
-    "dotenv": "^16.3.1"
+    "dotenv": "^16.3.1",
+    "ffmpeg-static": "^5.1.0",
+    "ffprobe-static": "^3.1.0",
+    "media-split": "^5.4.0",
+    "mp3-split": "^4.1.0"
   }
 }

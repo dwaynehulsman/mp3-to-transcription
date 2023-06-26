@@ -1,7 +1,14 @@
 # OpenAI Transcription Service
 A simple node.js application that transcribes audio files using OpenAI's transcription service.
 
-Prerequisites
+
+## Features
+- Uses OpenAI's API for transcription
+- Handles large audio files by splitting them into sections (whisper is limited to `26000000~` bytes)
+- Provides transcription progress updates
+- Outputs transcriptions as a single text file
+
+## Prerequisites
 - Node.js installed on your machine
 - An OpenAI account with an API key
 
